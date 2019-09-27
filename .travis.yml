@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t barakat95/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run barakat95/react-test npm run test -- --coverage
+
+after_success:
+  - docker build -t barakat95/mutli-client ./client
+  - docker build -t barakat95/mutli-nginx ./nginx
+  - docker build -t barakat95/mutli-server ./server
+  - docker build -t barakat95/mutli-worker ./worker
+  # login to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-std-in
+  # upload these images to docker-hup
+  - docker push barakat95/multi-client
+  - docker push barakat95/multi-nginx
+  - docker push barakat95/multi-server
+  - docker push barakat95/multi-worker
