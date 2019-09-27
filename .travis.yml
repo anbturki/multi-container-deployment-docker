@@ -15,7 +15,7 @@ after_success:
   - docker build -t barakat95/mutli-server ./server
   - docker build -t barakat95/mutli-worker ./worker
   # login to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-std-in
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
   # upload these images to docker-hup
   - docker push barakat95/multi-client
   - docker push barakat95/multi-nginx
