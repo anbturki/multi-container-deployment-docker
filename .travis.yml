@@ -10,10 +10,10 @@ script:
   - docker run barakat95/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t barakat95/mutli-client ./client
-  - docker build -t barakat95/mutli-nginx ./nginx
-  - docker build -t barakat95/mutli-server ./server
-  - docker build -t barakat95/mutli-worker ./worker
+  - docker build -t barakat95/multi-client ./client
+  - docker build -t barakat95/multi-nginx ./nginx
+  - docker build -t barakat95/multi-server ./server
+  - docker build -t barakat95/multi-worker ./worker
   # login to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # upload these images to docker-hup
